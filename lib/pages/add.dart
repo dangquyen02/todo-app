@@ -55,124 +55,148 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Container(
-          //color: Color(0xFFF79E89),
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 50,
-                ),
-                // Ô nhập title
-                Container(
-                  height: 48,
-                  child: TextField(
-                    controller: titleController,
-                    style: TextStyle(
-                        color: Colors.black), // Chữ nhập vào màu trắng
-                    decoration: InputDecoration(
-                      labelText: 'Title',
-                      labelStyle: TextStyle(color: Colors.black), //.white
-                      border: OutlineInputBorder(
-                        borderSide:
-                            //BorderSide(width: 1, color: Color(0x7F272727)),
-                            BorderSide(width: 1, color: Colors.black),
-                        borderRadius: BorderRadius.circular(12),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: Container(
+            //color: Color(0xFFF79E89),
+            height: MediaQuery.of(context).size.height,
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(36)),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.navigate_before),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(height: 25),
-
-                // Ô nhập nội dung
-                Container(
-                  height: 350,
-                  child: TextField(
-                    controller: descriptionController,
-                    maxLines: null,
-                    expands: true,
-                    //style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      labelText: 'Description',
-                      //labelStyle: TextStyle(color: Colors.white),
-                      labelStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: Color(0x7F272727)),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                    const SizedBox(
+                      height: 50,
                     ),
-                  ),
-                ),
-                SizedBox(height: 25),
-
-                // Ô chọn ngày giờ từ lịch
-                Container(
-                  height: 48,
-                  child: TextField(
-                    readOnly: true,
-                    controller: _dateTimeController,
-                    //style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      labelText: 'Select Date and Time',
-                      labelStyle: TextStyle(color: Colors.black), //.white
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.calendar_today,
-                            color: Colors.blueAccent), //.white
-                        onPressed: _pickDateTime,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Color(0x7F272727),
+                    // Ô nhập title
+                    Container(
+                      height: 48,
+                      width: MediaQuery.of(context).size.width,
+                      child: TextField(
+                        controller: titleController,
+                        style: const TextStyle(
+                            color: Colors.black), // Chữ nhập vào màu trắng
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          labelStyle:
+                              const TextStyle(color: Colors.black), //.white
+                          border: OutlineInputBorder(
+                            borderSide:
+                                //BorderSide(width: 1, color: Color(0x7F272727)),
+                                const BorderSide(width: 1, color: Colors.black),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(height: 40),
+                    const SizedBox(height: 25),
 
-                Container(
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _todoService.createTodo(
-                        titleController.text,
-                        descriptionController.text,
-                        _datePicker,
-                        widget.userModel.id!,
-                      );
-                      titleController.clear();
-                      descriptionController.clear();
-                      Navigator.pop(context);
-                      // Xử lý sự kiện khi nhấn nút Add
-                      // Đặt mã nguồn xử lý tại đây
-                    },
-                    child: const Text(
-                      'Add Todo',
-                      style: TextStyle(
-                          //color: Color(0xFFF79E89),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      // fixedSize:
-                      //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                    // Ô nhập nội dung
+                    Container(
+                      height: 350,
+                      width: MediaQuery.of(context).size.width,
+                      child: TextField(
+                        controller: descriptionController,
+                        maxLines: null,
+                        expands: true,
+                        //style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          //labelStyle: TextStyle(color: Colors.white),
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                width: 1, color: Color(0x7F272727)),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 25),
+
+                    // Ô chọn ngày giờ từ lịch
+                    Container(
+                      height: 48,
+                      width: MediaQuery.of(context).size.width,
+                      child: TextField(
+                        readOnly: true,
+                        controller: _dateTimeController,
+                        //style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: 'Select Date and Time',
+                          labelStyle:
+                              const TextStyle(color: Colors.black), //.white
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.calendar_today,
+                                color: Colors.blueAccent), //.white
+                            onPressed: _pickDateTime,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 1,
+                              color: Color(0x7F272727),
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+
+                    Container(
+                      height: 48,
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _todoService.createTodo(
+                            titleController.text,
+                            descriptionController.text,
+                            _datePicker,
+                            widget.userModel.id!,
+                          );
+                          titleController.clear();
+                          descriptionController.clear();
+                          Navigator.pop(context);
+                          // Xử lý sự kiện khi nhấn nút Add
+                          // Đặt mã nguồn xử lý tại đây
+                        },
+                        child: Text(
+                          'Add Todo',
+                          style: TextStyle(
+                              //color: Color(0xFFF79E89),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          // fixedSize:
+                          //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

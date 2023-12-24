@@ -135,29 +135,6 @@ class _EditPageState extends State<EditPage> {
                 ),
                 SizedBox(height: 20),
 
-                // Ô chèn thêm ảnh
-                // Container(
-                //   height: 48,
-                //   child: TextField(
-                //     readOnly: true,
-                //     controller: _imagePathController,
-                //     style: TextStyle(color: Colors.white),
-                //     decoration: InputDecoration(
-                //       labelText: 'Insert Image',
-                //       labelStyle: TextStyle(color: Colors.white),
-                //       suffixIcon: IconButton(
-                //         icon: Icon(Icons.image, color: Colors.white),
-                //         onPressed: _pickImage,
-                //       ),
-                //       border: OutlineInputBorder(
-                //         borderSide: BorderSide(width: 2, color: Colors.white),
-                //         borderRadius: BorderRadius.circular(12),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: 30),
-
                 // Nút Add
                 ElevatedButton(
                   onPressed: () {

@@ -43,218 +43,173 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: Colors.black,
       body: Center(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: const BoxDecoration(color: Colors.white),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Spacer(),
-                SizedBox(
-                    height: 330.0,
-                    width: 430,
-                    child: Image(
-                      //image: AssetImage('assets/images/Union.png'),
-                      image: AssetImage('assets/images/f2.png'),
-                      fit: BoxFit.cover,
-                    )),
-                Spacer(),
-                Container(
-                  width: 327,
-                  height: 48,
-                  child: TextField(
-                    controller: userNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: Color(0x7F272727)),
-                        borderRadius: BorderRadius.circular(12),
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                      height: 330.0,
+                      width: 430,
+                      child: Image(
+                        //image: AssetImage('assets/images/Union.png'),
+                        image: AssetImage('assets/images/f2.png'),
+                        fit: BoxFit.cover,
+                      )),
+                  Container(
+                    width: 327,
+                    height: 48,
+                    child: TextField(
+                      controller: userNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1, color: Color(0x7F272727)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 16.0),
-                Container(
-                  width: 327,
-                  height: 48,
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: _obscureText,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: Color(0x7F272727)),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureText
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                  const SizedBox(height: 16.0),
+                  Container(
+                    width: 327,
+                    height: 48,
+                    child: TextField(
+                      controller: passwordController,
+                      obscureText: _obscureText,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1, color: Color(0x7F272727)),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        onPressed: () {
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Container(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // Xử lý đăng nhập
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        // Kiểm tra độ dài và các yêu cầu khác của mật khẩu
+                        String password = passwordController.text;
+                        if (password.length < 6 ||
+                            !password.contains(RegExp(r'[a-zA-Z]')) ||
+                            password
+                                .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
                           setState(() {
-                            _obscureText = !_obscureText;
+                            isLoading = false;
                           });
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                // Container(
-                //   child: ElevatedButton(
-                //     onPressed: () async {
-                //       // Xử lý đăng nhập
-                //       setState(() {
-                //         isLoading = true;
-                //       });
-                //       // Lưu thông tin người dùng vào SharedPreferences
-                //       // saveUserInfo(emailController.text);
-                //       UserModel? userModel = await _userService.getUser(
-                //           userNameController.text, passwordController.text);
-                //       if (userModel == null) {
-                //         print('sai ten tk hoac mk hoac tk chua dki');
-                //         setState(() {
-                //           isLoading = false;
-                //         });
-                //         showIncorrectCredentialsDialog(context);
-                //         return;
-                //       }
-                //       print('ok');
-                //
-                //       setState(() {
-                //         isLoading = false;
-                //       });
-                //       Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) =>
-                //                   HomePage(userModel: userModel)));
-                //     },
-                //     style: ElevatedButton.styleFrom(
-                //       foregroundColor: Colors.white,
-                //       //backgroundColor: Color(0xfFF79E89),
-                //       backgroundColor: Colors.blueAccent,
-                //       fixedSize:
-                //           Size(327, 48), // Đặt kích thước của nút (rộng x cao)
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(12.0),
-                //       ),
-                //     ),
-                //     child: isLoading
-                //         ? CircularProgressIndicator(
-                //             color: Colors.white,
-                //           )
-                //         : Text('SIGN IN'),
-                //   ),
-                // ),
-                Container(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      // Xử lý đăng nhập
-                      setState(() {
-                        isLoading = true;
-                      });
+                          showPasswordErrorDialog(context);
+                          return;
+                        }
 
-                      // Kiểm tra độ dài và các yêu cầu khác của mật khẩu
-                      String password = passwordController.text;
-                      if (password.length < 6 ||
-                          !password.contains(RegExp(r'[a-zA-Z]')) ||
-                          password
-                              .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                        // Tiếp tục xử lý đăng nhập
+                        UserModel? userModel = await _userService.getUser(
+                            userNameController.text, password);
+
+                        if (userModel == null) {
+                          print('sai ten tk hoac mk hoac tk chua dki');
+                          setState(() {
+                            isLoading = false;
+                          });
+                          showIncorrectCredentialsDialog(context);
+                          return;
+                        }
+
+                        print('ok');
                         setState(() {
                           isLoading = false;
                         });
-                        showPasswordErrorDialog(context);
-                        return;
-                      }
 
-                      // Tiếp tục xử lý đăng nhập
-                      UserModel? userModel = await _userService.getUser(
-                          userNameController.text, password);
-
-                      if (userModel == null) {
-                        print('sai ten tk hoac mk hoac tk chua dki');
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showIncorrectCredentialsDialog(context);
-                        return;
-                      }
-
-                      print('ok');
-                      setState(() {
-                        isLoading = false;
-                      });
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(userModel: userModel),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blueAccent,
-                      fixedSize: Size(327, 48),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                    child: isLoading
-                        ? CircularProgressIndicator(
-                            color: Colors.white,
-                          )
-                        : Text('SIGN IN'),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Căn giữa theo trục ngang
-                  children: [
-                    Text(
-                      "Don`t have an account?",
-                      style: TextStyle(
-                        color: Color(0x66272727),
-                        fontSize: 12,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  SignUpPage()), // Điều hướng sang trang đăng ký
+                            builder: (context) =>
+                                HomePage(userModel: userModel),
+                          ),
                         );
                       },
-                      child: Text(
-                        'Sign up',
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blueAccent,
+                        fixedSize: const Size(327, 48),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                      ),
+                      child: isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text('SIGN IN'),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Căn giữa theo trục ngang
+                    children: [
+                      const Text(
+                        "Don`t have an account?",
                         style: TextStyle(
-                          //color: Color(0xFFF79E89),
-                          color: Colors.blue[800],
+                          color: Color(0x66272727),
                           fontSize: 12,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w400,
                           height: 0,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-              ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    SignUpPage()), // Điều hướng sang trang đăng ký
+                          );
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            //color: Color(0xFFF79E89),
+                            color: Colors.blue[800],
+                            fontSize: 12,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -273,14 +228,14 @@ class _SignInPageState extends State<SignInPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Thông báo'),
-          content: Text('Email hoặc mật khẩu không đúng.'),
+          title: const Text('Thông báo'),
+          content: const Text('Email hoặc mật khẩu không đúng.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Đóng'),
+              child: const Text('Đóng'),
             ),
           ],
         );
@@ -293,8 +248,8 @@ class _SignInPageState extends State<SignInPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Invalid Password'),
-          content: Text(
+          title: const Text('Invalid Password'),
+          content: const Text(
             'Mật khẩu phải có độ dài ít nhất 6 ký tự! '
             'Chứa ít nhất một chữ cái và không được chứa các ký tự đặc biệt.',
           ),
@@ -303,7 +258,7 @@ class _SignInPageState extends State<SignInPage> {
               onPressed: () {
                 Navigator.of(context).pop(); // Đóng hộp thoại
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

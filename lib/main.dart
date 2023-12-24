@@ -1,5 +1,6 @@
 import 'package:daily_planner/pages/add.dart';
 import 'package:daily_planner/pages/change_password.dart';
+import 'package:daily_planner/pages/chat_page.dart';
 import 'package:daily_planner/pages/home_page.dart';
 import 'package:daily_planner/pages/sign_up.dart';
 import 'package:flutter/material.dart';

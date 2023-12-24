@@ -1,56 +1,51 @@
+import 'package:daily_planner/model/task_of_todo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../model/todo_model.dart';
 
-class TodoService {
+class TaskTodoService {
   final _supabase = Supabase.instance.client;
 
-  Future<TodoModel?> createTodo(
-      String title, String description, DateTime time, int user_id) async {
+  Future<TaskOfTodoModel?> createTaskTodo(String title, int idTodo) async {
     List<dynamic> createTodo = await _supabase
-        .from('todo')
-        .insert(TodoModel(
-                title: title,
-                description: description,
-                time: time,
-                userId: user_id)
-            .toJson())
+        .from('task_of_todo')
+        .insert(TaskOfTodoModel(title: title, idTodo: idTodo).toJson())
         .select();
     if (createTodo.isEmpty) {
       return null;
     } else {
-      return TodoModel.fromJson(createTodo[0]);
+      return TaskOfTodoModel.fromJson(createTodo[0]);
     }
     // return null;
   }
 
-  Future<TodoModel?> editTodo(TodoModel todoModel) async {
+  Future<TaskOfTodoModel?> editTaskTodo(TaskOfTodoModel todoModel) async {
     List<dynamic> createTodo = await _supabase
-        .from('todo')
+        .from('task_of_todo')
         .update(todoModel.toJson())
         .eq("id", todoModel.id)
         .select();
     if (createTodo.isEmpty) {
       return null;
     } else {
-      return TodoModel.fromJson(createTodo[0]);
+      return TaskOfTodoModel.fromJson(createTodo[0]);
     }
     // return null;
   }
 
-  Future<TodoModel?> deleteTodo(int id) async {
+  Future<TaskOfTodoModel?> deleteTaskTodo(int id) async {
     List<dynamic> getTd =
-        await _supabase.from('todo').delete().eq('id', id).select();
+        await _supabase.from('task_of_todo').delete().eq('id', id).select();
     if (getTd.isEmpty) {
       return null;
     } else {
-      return TodoModel.fromJson(getTd[0]);
+      return TaskOfTodoModel.fromJson(getTd[0]);
     }
     // return null;
   }
 
-  Future<bool> updateTodo(TodoModel todo) async {
+  Future<bool> updateTaskTodo(TaskOfTodoModel todo) async {
     List<dynamic> getTd = await _supabase
-        .from('todo')
+        .from('task_of_todo')
         .update(todo.toJson())
         .eq('id', todo.id)
         .select();
@@ -59,6 +54,5 @@ class TodoService {
     } else {
       return true;
     }
-    // return null;
   }
 }

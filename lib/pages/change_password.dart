@@ -24,11 +24,12 @@ class _ChangePasswordState extends State<ChangePassword> {
       body: Center(
         child: Container(
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: const BoxDecoration(color: Colors.white),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
                     onPressed: () => Navigator.pop(context),
@@ -36,32 +37,29 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Icons.arrow_back,
                       size: 24,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 270.0,
-                  width: 350,
                   child: Image(
                     image: AssetImage('assets/images/lich.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
-                  width: 327,
                   height: 48,
                   child: Text("Name: " + widget.userModel.name.toString()),
                 ),
-                SizedBox(height: 6.0),
+                const SizedBox(height: 6.0),
                 Container(
                   width: 327,
                   height: 48,
                   child: Text(
                       "User name: " + widget.userModel.userName.toString()),
                 ),
-                SizedBox(height: 6.0),
+                const SizedBox(height: 6.0),
                 Container(
-                  width: 327,
                   height: 48,
                   child: TextField(
                     controller: oldPassworkController,
@@ -69,8 +67,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     decoration: InputDecoration(
                       labelText: 'Old password',
                       border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: Color(0x7F272727)),
+                        borderSide: const BorderSide(
+                            width: 1, color: Color(0x7F272727)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       suffixIcon: IconButton(
@@ -88,9 +86,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Container(
-                  width: 327,
                   height: 48,
                   child: TextField(
                     controller: newPasswordController,
@@ -98,8 +95,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     decoration: InputDecoration(
                       labelText: 'New password',
                       border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: Color(0x7F272727)),
+                        borderSide: const BorderSide(
+                            width: 1, color: Color(0x7F272727)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       suffixIcon: IconButton(
@@ -117,7 +114,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                   ),
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 ElevatedButton(
                   onPressed: () async {
                     // Xử lý đăng nhập
@@ -155,14 +152,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.blueAccent, //Color(0xFFF79E89)
-                    fixedSize: Size(327, 48),
+                    fixedSize: Size(MediaQuery.of(context).size.width, 48),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
-                  child: Text('CHANGE PASSWORD'),
+                  child: const Text('CHANGE PASSWORD'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
               ],
@@ -179,14 +176,14 @@ class _ChangePasswordState extends State<ChangePassword> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Thông báo'),
+          title: const Text('Thông báo'),
           content: Text(title),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Đóng'),
+              child: const Text('Đóng'),
             ),
           ],
         );

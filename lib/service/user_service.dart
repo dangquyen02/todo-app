@@ -33,6 +33,20 @@ class UserService {
     // return null;
   }
 
+  Future<List<UserModel>> getAllUser() async {
+    List<UserModel> listUserModel = [];
+    List<dynamic> getUsr = await _supabase.from('user').select();
+    if (getUsr.isEmpty) {
+      return [];
+    } else {
+      for (var item in getUsr) {
+        listUserModel.add(UserModel.fromJson(item));
+      }
+      return listUserModel;
+    }
+    // return null;
+  }
+
   Future<UserModel?> updateUser(UserModel userModel, String newpass) async {
     userModel.passWord = newpass;
     List<dynamic> createUser = await _supabase
