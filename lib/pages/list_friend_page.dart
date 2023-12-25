@@ -32,56 +32,77 @@ class _ListFriendpageState extends State<ListFriendpage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Column(
-        children: [
-          GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Text('danh sach')),
-          Expanded(
-              child: StreamBuilder<List<UserModel>>(
-                  stream: _userModelStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      print(snapshot.data!.length);
-                      List<UserModel> listUserModel = [];
-                      for (var item in snapshot.data!) {
-                        if (item.id != widget.idUser) {
-                          listUserModel.add(item);
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(36)),
+                    child: Icon(Icons.navigate_before),
+                  ),
+                ),
+                Text('danh sach'),
+                Container(
+                  width: 50,
+                  height: 50,
+                )
+              ],
+            ),
+            //child: const Text('danh sach')),
+            Expanded(
+                child: StreamBuilder<List<UserModel>>(
+                    stream: _userModelStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        print(snapshot.data!.length);
+                        List<UserModel> listUserModel = [];
+                        for (var item in snapshot.data!) {
+                          if (item.id != widget.idUser) {
+                            listUserModel.add(item);
+                          }
                         }
-                      }
-                      return ListView.builder(
-                          itemCount: listUserModel.length,
-                          itemBuilder: (context, index) => Card(
-                                color: Colors
-                                    .greenAccent, // Màu nền của từng công việc: const Color(0xFFF79E89)
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: ListTile(
-                                  title: Text(listUserModel[index].name!),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatPage(
-                                          idUser: widget.idUser,
-                                          userRecive: listUserModel[index],
+                        return ListView.builder(
+                            itemCount: listUserModel.length,
+                            itemBuilder: (context, index) => Card(
+                                  color: Colors.greenAccent, // Màu nền
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: ListTile(
+                                    title: Text(listUserModel[index].name!),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ChatPage(
+                                            idUser: widget.idUser,
+                                            userRecive: listUserModel[index],
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ));
-                    }
-                    return Center(
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }))
-        ],
+                                      );
+                                    },
+                                  ),
+                                ));
+                      }
+                      return Center(
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }))
+          ],
+        ),
       ),
     ));
   }

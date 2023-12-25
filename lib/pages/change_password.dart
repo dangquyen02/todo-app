@@ -1,3 +1,4 @@
+import 'package:daily_planner/pages/sing_in.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_planner/service/user_service.dart';
 import 'package:daily_planner/pages/home_page.dart';
@@ -31,17 +32,33 @@ class _ChangePasswordState extends State<ChangePassword> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 24,
-                    )),
-                const SizedBox(
-                  height: 270.0,
-                  child: Image(
-                    image: AssetImage('assets/images/lich.png'),
-                    fit: BoxFit.cover,
+                // IconButton(
+                //     onPressed: () => Navigator.pop(context),
+                //     icon: const Icon(
+                //       Icons.arrow_back,
+                //       size: 24,
+                //     )),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(36)),
+                      child: Icon(Icons.navigate_before)),
+                ),
+
+                Container(
+                  alignment: Alignment.center,
+                  child: const SizedBox(
+                    height: 270.0,
+                    child: Image(
+                      image: AssetImage('assets/images/lich.png'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -119,28 +136,37 @@ class _ChangePasswordState extends State<ChangePassword> {
                   onPressed: () async {
                     // Xử lý đăng nhập
                     setState(() {});
-                    // Lưu thông tin người dùng vào SharedPreferences
-                    // saveUserInfo(emailController.text);
-                    UserModel? userModel = await _userService.updateUser(
-                        widget.userModel, newPasswordController.text);
+
+                    UserModel? userModel = await _userService.getUser(
+                        widget.userModel.userName.toString(),
+                        oldPassworkController.text);
                     if (userModel == null) {
                       print('sai');
                       setState(() {});
-                      showIncorrectCredentialsDialog(context, "");
+                      showIncorrectCredentialsDialog(
+                          context, "Mật khẩu không đúng");
                       return;
                     } else if (newPasswordController.text == "") {
-                      showIncorrectCredentialsDialog(context, "Nhập mk ms");
+                      showIncorrectCredentialsDialog(
+                          context, "Nhập mật khẩu mới");
                       return;
-                    } else if (oldPassworkController !=
+                    } else if (newPasswordController.text.length < 6) {
+                      showIncorrectCredentialsDialog(
+                          context, "Mật khẩu mới từ 6 kí tự");
+                      return;
+                    } else if (oldPassworkController.text !=
                         widget.userModel.passWord) {
                       showIncorrectCredentialsDialog(
-                          context, "Old password không đúng");
+                          context, "Mật khẩu không đúng");
                       return;
                     } else if (oldPassworkController == "") {
                       showIncorrectCredentialsDialog(context, "Nhập mật khẩu");
                       return;
                     }
                     print('ok');
+
+                    UserModel? userM = await _userService.updateUser(
+                        widget.userModel, newPasswordController.text);
 
                     setState(() {});
                     Navigator.push(

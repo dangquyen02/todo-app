@@ -179,6 +179,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       password,
                       fullnameController.text,
                     );
+                    userNameController.clear();
+                    fullnameController.clear();
+                    passwordController.clear();
+                    confirmPasswordController.clear();
+
+                    showSucessDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
@@ -268,6 +274,26 @@ class _SignUpPageState extends State<SignUpPage> {
         return AlertDialog(
           title: Text('Invalid Username'),
           content: Text('Tên người dùng phải kết thúc bằng @gmail.com.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Đóng hộp thoại
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showSucessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(''),
+          content: Text('Đăng ký thành công'),
           actions: [
             TextButton(
               onPressed: () {

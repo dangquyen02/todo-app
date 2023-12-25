@@ -111,7 +111,8 @@ class _DetailPageState extends State<DetailPage> {
                                     topRight: Radius.circular(16),
                                     topLeft: Radius.circular(16)),
                               ),
-                              backgroundColor: const Color(0xFFF79A89),
+                              //backgroundColor: const Color(0xFFF79A89),
+                              backgroundColor: Colors.indigo[300],
                               isScrollControlled: true,
                               builder: (BuildContext context) {
                                 return Container(
@@ -214,8 +215,8 @@ class _DetailPageState extends State<DetailPage> {
                                                   child: const Text(
                                                     'Back',
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xFFF79E89),
+                                                        color: Colors.indigo,
+                                                        //Color(0xFFF79E89),
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
@@ -273,8 +274,8 @@ class _DetailPageState extends State<DetailPage> {
                                                   child: const Text(
                                                     'Edit Todo',
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xFFF79E89),
+                                                        color: Colors.indigo,
+                                                        //Color(0xFFF79E89),
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
@@ -337,7 +338,8 @@ class _DetailPageState extends State<DetailPage> {
                         const Text(
                           'Nội dung: ',
                           style: TextStyle(
-                            color: Color(0xFFF76C6A),
+                            color: Colors.deepPurple,
+                            //color: Color(0xFFF76C6A),
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),

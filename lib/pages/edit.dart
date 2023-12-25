@@ -64,7 +64,7 @@ class _EditPageState extends State<EditPage> {
       backgroundColor: Colors.black,
       body: Center(
         child: Container(
-          color: Color(0xFFF79E89),
+          color: Colors.blue[800],
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -143,7 +143,7 @@ class _EditPageState extends State<EditPage> {
                   },
                   child: Text(
                     'EDIT TODO',
-                    style: TextStyle(color: Color(0xFFF79E89)),
+                    style: TextStyle(color: Colors.blue),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

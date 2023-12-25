@@ -177,6 +177,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
+
+                // Tìm kiếm
                 Padding(
                   padding: const EdgeInsets.only(left: 4, right: 4),
                   child: TextFormField(
