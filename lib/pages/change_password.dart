@@ -1,4 +1,4 @@
-import 'package:daily_planner/pages/sing_in.dart';
+import 'package:daily_planner/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_planner/service/user_service.dart';
 import 'package:daily_planner/pages/home_page.dart';

@@ -4,7 +4,7 @@ import 'package:daily_planner/model/todo_model.dart';
 import 'package:daily_planner/model/user_model.dart';
 import 'package:daily_planner/pages/change_password.dart';
 import 'package:daily_planner/pages/list_friend_page.dart';
-import 'package:daily_planner/pages/sing_in.dart';
+import 'package:daily_planner/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_planner/pages/add.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

@@ -1,7 +1,7 @@
 import 'package:daily_planner/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:daily_planner/pages/sing_in.dart';
+import 'package:daily_planner/pages/sign_in.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
