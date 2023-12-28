@@ -52,9 +52,12 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 30,
+                  ),
                   const SizedBox(
-                      height: 330.0,
-                      width: 430,
+                      height: 320.0,
+                      width: 410,
                       child: Image(
                         //image: AssetImage('assets/images/Union.png'),
                         image: AssetImage('assets/images/f2.png'),
