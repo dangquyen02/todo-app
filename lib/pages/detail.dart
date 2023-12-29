@@ -121,7 +121,6 @@ class _DetailPageState extends State<DetailPage> {
                                     topRight: Radius.circular(16),
                                     topLeft: Radius.circular(16)),
                               ),
-                              //backgroundColor: const Color(0xFF7DABF6),
                               backgroundColor: Colors.grey[50],
                               isScrollControlled: true,
                               builder: (BuildContext context) {
@@ -144,7 +143,7 @@ class _DetailPageState extends State<DetailPage> {
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
-                                            ), // Chữ nhập vào màu trắng
+                                            ),
                                             decoration: InputDecoration(
                                               labelText: 'Title',
                                               labelStyle: const TextStyle(
@@ -160,6 +159,7 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 20),
+
                                         // Ô nhập nội dung
                                         Container(
                                           height: 200,
@@ -184,6 +184,7 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 20),
+
                                         // Ô chọn ngày giờ từ lịch
                                         Container(
                                           height: 48,
@@ -286,7 +287,6 @@ class _DetailPageState extends State<DetailPage> {
                                                     'Edit Todo',
                                                     style: TextStyle(
                                                         color: Colors.white,
-                                                        //Color(0xFFF79E89),
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
@@ -294,8 +294,6 @@ class _DetailPageState extends State<DetailPage> {
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
                                                         Colors.indigo,
-                                                    // fixedSize:
-                                                    //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -412,6 +410,8 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         const Spacer(),
+
+                        // thêm công việc con
                         GestureDetector(
                           onTap: () {
                             print('add');
@@ -433,6 +433,8 @@ class _DetailPageState extends State<DetailPage> {
                       ],
                     ),
                     SizedBox(height: 12),
+
+                    // xóa công việc con
                     Expanded(
                         child: StreamBuilder<List<TaskOfTodoModel>>(
                             stream: _taskTodoStream,

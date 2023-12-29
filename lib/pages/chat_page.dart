@@ -90,10 +90,13 @@ class _ChatPageState extends State<ChatPage> {
                           itemBuilder: (context, index) => Container(
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(
-                                  crossAxisAlignment:
-                                      listMessage[index].idSend == widget.idUser
-                                          ? CrossAxisAlignment.end
-                                          : CrossAxisAlignment.start,
+                                  crossAxisAlignment: listMessage[index]
+                                              .idSend ==
+                                          widget.idUser
+                                      ? CrossAxisAlignment
+                                          .end // căn chỉnh message theo cạnh phải (gửi đi)
+                                      : CrossAxisAlignment
+                                          .start, // căn chỉnh message theo cạnh trái (nhận)
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.all(12),

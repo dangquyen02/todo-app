@@ -205,7 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       "Already have an account? ",
                       style: TextStyle(
                         color: Color(0x66272727),
-                        fontSize: 12,
+                        fontSize: 14,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w400,
                         height: 0,
@@ -224,7 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         'Sign in',
                         style: TextStyle(
                           color: Colors.blue,
-                          fontSize: 12,
+                          fontSize: 14,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w400,
                           height: 0,

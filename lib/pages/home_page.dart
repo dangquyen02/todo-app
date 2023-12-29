@@ -93,16 +93,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           "Daily Planner",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              //color: Color(0xFFF79E89),
                               color: Colors.deepPurple,
                               fontSize: 15),
                         ),
                       ),
                       const Spacer(),
-                      // Điều chỉnh khoảng cách từ phải sang trái
                       IconButton(
                         icon: const Icon(Icons.message),
-                        //color: const Color(0xFFF79E89),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -136,7 +133,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         },
                       ),
                     ],
-                  ), // Khoảng cách giữa hai Row
+                  ),
 
                   Container(
                     child: Padding(
@@ -164,6 +161,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                           ),
                           Spacer(),
+
+                          // tìm kiếm
                           Container(
                             width: 200,
                             height: 40,
@@ -295,8 +294,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     return Card(
                                       color: todosResult[index].check!
                                           ? Colors.greenAccent
-                                          : Colors.yellow[
-                                              400], // Màu nền của từng công việc: const Color(0xFFF79E89)
+                                          : Colors.yellow[400],
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -329,6 +327,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               print('aaaa');
                               return Container();
                             }),
+
+                        // công việc chưa làm
                         StreamBuilder<List<TodoModel>>(
                             stream: _todoStream,
                             builder: (context, snapshot) {
@@ -399,6 +399,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 ),
                               );
                             }),
+
+                        // công việc đã hoàn thành
                         StreamBuilder<List<TodoModel>>(
                             stream: _todoStream,
                             builder: (context, snapshot) {
@@ -430,8 +432,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return Card(
-                                      color: Colors
-                                          .greenAccent, // Màu nền của từng công việc: const Color(0xFFF79E89)
+                                      color: Colors.greenAccent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
