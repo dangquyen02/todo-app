@@ -94,14 +94,24 @@ class _DetailPageState extends State<DetailPage> {
               children: [
                 Row(
                   children: [
-                    IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: 24,
-                        )),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(36)),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.navigate_before),
+                      ),
+                    ),
+
                     const Spacer(),
                     if (!todoModel!.check!)
+
+                      // edit todo
                       IconButton(
                           onPressed: () {
                             showModalBottomSheet<void>(
@@ -111,8 +121,8 @@ class _DetailPageState extends State<DetailPage> {
                                     topRight: Radius.circular(16),
                                     topLeft: Radius.circular(16)),
                               ),
-                              //backgroundColor: const Color(0xFFF79A89),
-                              backgroundColor: Colors.indigo[300],
+                              //backgroundColor: const Color(0xFF7DABF6),
+                              backgroundColor: Colors.grey[50],
                               isScrollControlled: true,
                               builder: (BuildContext context) {
                                 return Container(
@@ -132,12 +142,13 @@ class _DetailPageState extends State<DetailPage> {
                                           child: TextField(
                                             controller: titleController,
                                             style: const TextStyle(
-                                                color: Colors
-                                                    .white), // Chữ nhập vào màu trắng
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                            ), // Chữ nhập vào màu trắng
                                             decoration: InputDecoration(
                                               labelText: 'Title',
                                               labelStyle: const TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.black),
                                               border: OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                     width: 1,
@@ -157,11 +168,11 @@ class _DetailPageState extends State<DetailPage> {
                                             maxLines: null,
                                             expands: true,
                                             style: const TextStyle(
-                                                color: Colors.white),
+                                                color: Colors.black),
                                             decoration: InputDecoration(
                                               labelText: 'Description',
                                               labelStyle: const TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.black),
                                               border: OutlineInputBorder(
                                                 borderSide: const BorderSide(
                                                     width: 1,
@@ -180,15 +191,15 @@ class _DetailPageState extends State<DetailPage> {
                                             readOnly: true,
                                             controller: _dateTimeController,
                                             style: const TextStyle(
-                                                color: Colors.white),
+                                                color: Colors.black),
                                             decoration: InputDecoration(
                                               labelText: 'Select Date and Time',
                                               labelStyle: const TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.black),
                                               suffixIcon: IconButton(
                                                 icon: const Icon(
                                                     Icons.calendar_today,
-                                                    color: Colors.white),
+                                                    color: Colors.black),
                                                 onPressed: _pickDateTime,
                                               ),
                                               border: OutlineInputBorder(
@@ -215,7 +226,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   child: const Text(
                                                     'Back',
                                                     style: TextStyle(
-                                                        color: Colors.indigo,
+                                                        color: Colors.white,
                                                         //Color(0xFFF79E89),
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -223,7 +234,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        Colors.white,
+                                                        Colors.indigo,
                                                     // fixedSize:
                                                     //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
                                                     shape:
@@ -274,7 +285,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   child: const Text(
                                                     'Edit Todo',
                                                     style: TextStyle(
-                                                        color: Colors.indigo,
+                                                        color: Colors.white,
                                                         //Color(0xFFF79E89),
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -282,7 +293,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        Colors.white,
+                                                        Colors.indigo,
                                                     // fixedSize:
                                                     //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
                                                     shape:
@@ -306,24 +317,31 @@ class _DetailPageState extends State<DetailPage> {
                           },
                           icon: const Icon(
                             Icons.edit,
+                            color: Colors.green,
                             size: 24,
                           )),
+
+                    // xóa todo
                     IconButton(
                         onPressed: () => showIncorrectCredentialsDialog(
                             context, 'Bạn có muốn xóa'),
                         icon: const Icon(
                           Icons.delete,
+                          color: Colors.red,
                           size: 24,
                         )),
+
+                    // đánh dấu hoàn thành
                     IconButton(
                         onPressed: () => showCheckedDialog(
                             context,
                             todoModel!.check!
-                                ? 'Bạn muốn hủy hoành thành?'
+                                ? 'Bạn muốn hủy hoàn thành?'
                                 : 'Bạn đã hoàn thành?'),
                         icon: Icon(
                           todoModel!.check! ? Icons.close : Icons.check,
                           size: 24,
+                          color: Colors.blue,
                         ))
                   ],
                 ),
@@ -341,7 +359,7 @@ class _DetailPageState extends State<DetailPage> {
                             color: Colors.deepPurple,
                             //color: Color(0xFFF76C6A),
                             fontSize: 22,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -352,23 +370,24 @@ class _DetailPageState extends State<DetailPage> {
                           child: Divider(),
                         ),
                         const SizedBox(
-                          height: 12,
+                          height: 15,
                         ),
                         Text(
                           "${todoModel!.description}",
                           style: const TextStyle(
                             color: Color(0xFF272727),
-                            fontSize: 17,
+                            fontSize: 18,
                             fontWeight: FontWeight.w400,
+                            height: 1.5,
                           ),
                         ),
                         const SizedBox(
-                          height: 12,
+                          height: 15,
                         ),
                         Text(
                           'Thời gian: ${todoModel!.time}',
                           style: const TextStyle(
-                            color: Color(0xFF272727),
+                            color: Colors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
@@ -377,12 +396,21 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                 ),
+
+                // công việc con
                 Expanded(
                     child: Column(
                   children: [
                     Row(
                       children: [
-                        const Text('Công việc con:'),
+                        Text(
+                          'Công việc con:',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green.shade700,
+                          ),
+                        ),
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
@@ -404,6 +432,7 @@ class _DetailPageState extends State<DetailPage> {
                         )
                       ],
                     ),
+                    SizedBox(height: 12),
                     Expanded(
                         child: StreamBuilder<List<TaskOfTodoModel>>(
                             stream: _taskTodoStream,

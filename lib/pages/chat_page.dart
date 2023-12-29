@@ -39,7 +39,8 @@ class _ChatPageState extends State<ChatPage> {
         child: Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        //padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.only(left: 25, right: 25),
         child: Column(
           children: [
             Row(
@@ -57,7 +58,10 @@ class _ChatPageState extends State<ChatPage> {
                           borderRadius: BorderRadius.circular(36)),
                       child: Icon(Icons.navigate_before)),
                 ),
-                Text(widget.userRecive.name!),
+                Text(
+                  widget.userRecive.name!,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
                 Container(
                   width: 50,
                   height: 50,
@@ -94,8 +98,13 @@ class _ChatPageState extends State<ChatPage> {
                                     Container(
                                       padding: const EdgeInsets.all(12),
                                       margin: const EdgeInsets.only(bottom: 4),
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
+                                      // width: MediaQuery.of(context).size.width *
+                                      //     0.7,
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.65,
+                                      ),
                                       decoration: BoxDecoration(
                                           color: listMessage[index].idSend ==
                                                   widget.idUser
@@ -104,7 +113,10 @@ class _ChatPageState extends State<ChatPage> {
                                           borderRadius:
                                               BorderRadius.circular(16)),
                                       child: Text(listMessage[index].message),
-                                    )
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
                                   ],
                                 ),
                               ));
@@ -122,6 +134,14 @@ class _ChatPageState extends State<ChatPage> {
               padding: const EdgeInsets.only(right: 4),
               child: Row(
                 children: [
+                  Icon(Icons.add_circle_outline),
+                  SizedBox(width: 6),
+                  Icon(Icons.camera_alt),
+                  SizedBox(width: 6),
+                  Icon(Icons.image),
+                  SizedBox(width: 6),
+                  Icon(Icons.mic),
+                  SizedBox(width: 6),
                   Expanded(
                     child: TextFormField(
                       controller: _messageController,
@@ -130,13 +150,13 @@ class _ChatPageState extends State<ChatPage> {
                         hoverColor: Colors.deepPurple,
                         focusColor: Colors.deepPurple,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                            borderRadius: BorderRadius.circular(22)),
                         hintText: 'Nhập nội dung',
                       ),
                     ),
                   ),
                   const SizedBox(
-                    width: 4,
+                    width: 10,
                   ),
                   GestureDetector(
                       onTap: () {
@@ -149,7 +169,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 16,
             ),
           ],
         ),

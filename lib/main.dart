@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SignInPage(),
+      title: "Daily planner",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         //primaryColor: Color(0xFFF79E89),

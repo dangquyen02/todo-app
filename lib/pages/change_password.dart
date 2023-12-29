@@ -54,30 +54,38 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Container(
                   alignment: Alignment.center,
                   child: const SizedBox(
-                    height: 270.0,
+                    height: 300.0,
+                    width: 300.0,
                     child: Image(
-                      image: AssetImage('assets/images/lich.png'),
+                      image: AssetImage('assets/images/change.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 Container(
-                  height: 48,
-                  child: Text("Name: " + widget.userModel.name.toString()),
-                ),
-                const SizedBox(height: 6.0),
-                Container(
-                  width: 327,
-                  height: 48,
+                  height: 30,
+                  padding: EdgeInsets.only(left: 50, right: 50),
                   child: Text(
-                      "User name: " + widget.userModel.userName.toString()),
+                    "Name: " + widget.userModel.name.toString(),
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                const SizedBox(height: 2.0),
+                Container(
+                  height: 40,
+                  padding: EdgeInsets.only(left: 50, right: 50),
+                  child: Text(
+                    "User name: " + widget.userModel.userName.toString(),
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 const SizedBox(height: 6.0),
                 Container(
                   height: 48,
+                  padding: EdgeInsets.only(left: 50, right: 50),
                   child: TextField(
                     controller: oldPassworkController,
                     obscureText: _obscureText,
@@ -106,6 +114,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 const SizedBox(height: 16.0),
                 Container(
                   height: 48,
+                  padding: EdgeInsets.only(left: 50, right: 50),
                   child: TextField(
                     controller: newPasswordController,
                     obscureText: _obscureText2,
@@ -132,58 +141,62 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ),
                 const SizedBox(height: 25.0),
-                ElevatedButton(
-                  onPressed: () async {
-                    // Xử lý đăng nhập
-                    setState(() {});
-
-                    UserModel? userModel = await _userService.getUser(
-                        widget.userModel.userName.toString(),
-                        oldPassworkController.text);
-                    if (userModel == null) {
-                      print('sai');
+                Container(
+                  padding: EdgeInsets.only(left: 50, right: 50),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // Xử lý đăng nhập
                       setState(() {});
-                      showIncorrectCredentialsDialog(
-                          context, "Mật khẩu không đúng");
-                      return;
-                    } else if (newPasswordController.text == "") {
-                      showIncorrectCredentialsDialog(
-                          context, "Nhập mật khẩu mới");
-                      return;
-                    } else if (newPasswordController.text.length < 6) {
-                      showIncorrectCredentialsDialog(
-                          context, "Mật khẩu mới từ 6 kí tự");
-                      return;
-                    } else if (oldPassworkController.text !=
-                        widget.userModel.passWord) {
-                      showIncorrectCredentialsDialog(
-                          context, "Mật khẩu không đúng");
-                      return;
-                    } else if (oldPassworkController == "") {
-                      showIncorrectCredentialsDialog(context, "Nhập mật khẩu");
-                      return;
-                    }
-                    print('ok');
 
-                    UserModel? userM = await _userService.updateUser(
-                        widget.userModel, newPasswordController.text);
+                      UserModel? userModel = await _userService.getUser(
+                          widget.userModel.userName.toString(),
+                          oldPassworkController.text);
+                      if (userModel == null) {
+                        print('sai');
+                        setState(() {});
+                        showIncorrectCredentialsDialog(
+                            context, "Mật khẩu không đúng");
+                        return;
+                      } else if (newPasswordController.text == "") {
+                        showIncorrectCredentialsDialog(
+                            context, "Nhập mật khẩu mới");
+                        return;
+                      } else if (newPasswordController.text.length < 6) {
+                        showIncorrectCredentialsDialog(
+                            context, "Mật khẩu mới từ 6 kí tự");
+                        return;
+                      } else if (oldPassworkController.text !=
+                          widget.userModel.passWord) {
+                        showIncorrectCredentialsDialog(
+                            context, "Mật khẩu không đúng");
+                        return;
+                      } else if (oldPassworkController == "") {
+                        showIncorrectCredentialsDialog(
+                            context, "Nhập mật khẩu");
+                        return;
+                      }
+                      print('ok');
 
-                    setState(() {});
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HomePage(userModel: userModel)));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blueAccent, //Color(0xFFF79E89)
-                    fixedSize: Size(MediaQuery.of(context).size.width, 48),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                      UserModel? userM = await _userService.updateUser(
+                          widget.userModel, newPasswordController.text);
+
+                      setState(() {});
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  HomePage(userModel: userModel)));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blueAccent, //Color(0xFFF79E89)
+                      fixedSize: Size(MediaQuery.of(context).size.width, 48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                     ),
+                    child: const Text('CHANGE PASSWORD'),
                   ),
-                  child: const Text('CHANGE PASSWORD'),
                 ),
                 const SizedBox(
                   height: 60,

@@ -56,11 +56,12 @@ class _SignInPageState extends State<SignInPage> {
                     height: 30,
                   ),
                   const SizedBox(
-                      height: 320.0,
-                      width: 410,
+                      // height: 320.0,
+                      // width: 410,
+                      height: 300,
+                      width: 300,
                       child: Image(
-                        //image: AssetImage('assets/images/Union.png'),
-                        image: AssetImage('assets/images/f2.png'),
+                        image: AssetImage('assets/images/sign_in.png'),
                         fit: BoxFit.cover,
                       )),
                   Container(
@@ -142,6 +143,9 @@ class _SignInPageState extends State<SignInPage> {
                           return;
                         }
 
+                        // Lưu thông tin người dùng vào SharedPreferences
+                        // await saveUserInfo(userNameController.text);
+
                         print('ok');
                         setState(() {
                           isLoading = false;
@@ -157,7 +161,8 @@ class _SignInPageState extends State<SignInPage> {
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.blueAccent,
+                        //backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.blue[600],
                         fixedSize: const Size(327, 48),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
@@ -179,7 +184,7 @@ class _SignInPageState extends State<SignInPage> {
                         "Don`t have an account?",
                         style: TextStyle(
                           color: Color(0x66272727),
-                          fontSize: 12,
+                          fontSize: 14,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w400,
                           height: 0,
@@ -199,7 +204,7 @@ class _SignInPageState extends State<SignInPage> {
                           style: TextStyle(
                             //color: Color(0xFFF79E89),
                             color: Colors.blue[800],
-                            fontSize: 12,
+                            fontSize: 14,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w400,
                             height: 0,
@@ -218,6 +223,13 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+// Hàm để kiểm tra xem người dùng đã đăng nhập trước đó hay chưa
+  Future<bool> isUserLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userEmail = prefs.getString('email');
+    return userEmail != null && userEmail.isNotEmpty;
   }
 
   // Hàm để lưu thông tin người dùng vào SharedPreferences

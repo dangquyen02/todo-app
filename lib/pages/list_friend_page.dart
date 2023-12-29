@@ -50,14 +50,17 @@ class _ListFriendpageState extends State<ListFriendpage> {
                     child: Icon(Icons.navigate_before),
                   ),
                 ),
-                Text('danh sach'),
+                Text(
+                  'Danh sách bạn',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 Container(
                   width: 50,
                   height: 50,
                 )
               ],
             ),
-            //child: const Text('danh sach')),
+            SizedBox(height: 12),
             Expanded(
                 child: StreamBuilder<List<UserModel>>(
                     stream: _userModelStream,
@@ -78,6 +81,10 @@ class _ListFriendpageState extends State<ListFriendpage> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: ListTile(
+                                    leading: Icon(
+                                      Icons.person,
+                                      color: Colors.black,
+                                    ),
                                     title: Text(listUserModel[index].name!),
                                     onTap: () {
                                       Navigator.push(

@@ -92,7 +92,9 @@ class _AddPageState extends State<AddPage> {
                       child: TextField(
                         controller: titleController,
                         style: const TextStyle(
-                            color: Colors.black), // Chữ nhập vào màu trắng
+                            color: Colors.black,
+                            fontWeight:
+                                FontWeight.bold), // Chữ nhập vào màu trắng
                         decoration: InputDecoration(
                           labelText: 'Title',
                           labelStyle:
@@ -185,7 +187,7 @@ class _AddPageState extends State<AddPage> {
                               fontWeight: FontWeight.bold),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
+                          backgroundColor: Colors.blue[800],
                           // fixedSize:
                           //     Size(327, 48), // Đặt kích thước của nút (rộng x cao)
                           shape: RoundedRectangleBorder(
